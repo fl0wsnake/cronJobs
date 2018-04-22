@@ -1,0 +1,24 @@
+service:
+    name: modafinilcat-notifier
+
+plugins:
+    - serverless-webpack
+
+provider:
+    name: aws
+    runtime: nodejs6.10
+    stage: dev
+    profile: personalEU
+    region: eu-central-1
+    environment:
+        EMAIL_USER: ${file(env.yml):email-user}
+        EMAIL_PASSWORD : ${file(env.yml):email-password}
+    role: arn:aws:iam::905399047847:role/lambda_s3
+    timeout: 20
+
+functions:
+    check:
+        handler: handler.check
+        events:
+            - schedule:
+                rate: rate(1 hour)
