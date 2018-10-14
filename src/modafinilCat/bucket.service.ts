@@ -10,21 +10,17 @@ export async function init() {
         .promise()
 }
 
-export async function fetchPresentModas() {
+export async function fetchPresent() {
     try {
-        let response = await s3
-            .getObject({
-                Bucket: config.bucket,
-                Key: config.object
-            })
-            .promise()
+        let response = await getPresent()
         let body = response.Body.toString()
         let result = JSON.parse(body)
+        let present = result.modas
 
-        return result
+        return present
     } catch (err) {
         let defaultValue = {
-            modasPresent: []
+            modas: []
         }
 
         await s3
@@ -39,16 +35,33 @@ export async function fetchPresentModas() {
     }
 }
 
-export async function putPresentModas(presentModas) {
-    putObject(config.object, presentModas)
+export async function getPresent() {
+    let result = await getObject(config.object)
+    return result
 }
 
-async function putObject(objectName, value) {
-    return s3
+export async function putPresent(present) {
+    let result = await putObject(config.object, {modas: present})
+    return result
+}
+
+async function getObject(key) {
+    let result = await s3
+        .getObject({
+            Bucket: config.bucket,
+            Key: key
+        })
+        .promise()
+    return result
+}
+
+async function putObject(key, value) {
+    let result = await s3
         .putObject({
             Bucket: config.bucket,
-            Key: objectName,
+            Key: key,
             Body: JSON.stringify(value)
         })
         .promise()
+    return result
 }

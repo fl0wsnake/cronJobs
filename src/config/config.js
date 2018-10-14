@@ -6,6 +6,6 @@ let config = nconf.env({
     parseValues: true,
 }).get()
 
-console.log(`function is operating with the next config: ${config}`)
+console.log(`function is operating with the next config: ${JSON.stringify(config)}`)
 
 export default config

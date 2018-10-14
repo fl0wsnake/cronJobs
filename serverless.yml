@@ -3,6 +3,7 @@ service:
 
 plugins:
     - serverless-webpack
+    - serverless-offline
 
 provider:
     name: aws
@@ -12,9 +13,9 @@ provider:
     region: eu-central-1
     environment:
         modafinilcat__s3__bucket: modafinilcat-notifier
-        modafinilcat__s3__object: presentModas.json
+        modafinilcat__s3__object: present.json
         modafinilcat__tg__token: 673982582:AAHdM5iUhDg3YLYmypWdO0I7SW5HCxUgv5Q
-        modafinilcat__tg__chatId: https://t.me/ModafinilCatAlerts
+        modafinilcat__tg__chatId: '@ModafinilCatAlerts'
     role: arn:aws:iam::072423406874:role/s3-read-write
     timeout: 20
 

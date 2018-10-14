@@ -4,7 +4,7 @@ import * as R from 'ramda'
 
 const modas = ['Artvigil', 'Modalert', 'Modvigil', 'Waklert', 'Modawake']
 
-export let fetchPresentModas = async () => {
+export async function fetchPresent() {
     let $ = cheerio.load(
         await axios.get('https://modafinilcat.com.ua/').then(resp => resp.data)
     )
@@ -13,5 +13,7 @@ export let fetchPresentModas = async () => {
     )
         .toArray()
         .map(h => h.childNodes[2].data)
-    return R.difference(modas, absent)
+    let diff = R.difference(modas, absent)
+
+    return diff
 }
