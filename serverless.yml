@@ -1,19 +1,21 @@
 service:
-    name: modafinilcat-notifier
+    name: cronJobs
 
 plugins:
     - serverless-webpack
 
 provider:
     name: aws
-    runtime: nodejs6.10
+    runtime: nodejs8.10
     stage: dev
-    profile: personalEU
+    profile: personal
     region: eu-central-1
     environment:
-        EMAIL_USER: ${file(env.yml):email-user}
-        EMAIL_PASSWORD : ${file(env.yml):email-password}
-    role: arn:aws:iam::905399047847:role/lambda_s3
+        modafinilcat__s3__bucket: modafinilcat-notifier
+        modafinilcat__s3__object: presentModas.json
+        modafinilcat__tg__token: 673982582:AAHdM5iUhDg3YLYmypWdO0I7SW5HCxUgv5Q
+        modafinilcat__tg__chatId: https://t.me/ModafinilCatAlerts
+    role: arn:aws:iam::072423406874:role/s3-read-write
     timeout: 20
 
 functions:
