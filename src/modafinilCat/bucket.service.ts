@@ -3,11 +3,17 @@ import {s3 as config} from './config'
 const s3 = new AWS.S3()
 
 export async function init() {
-    return s3
+    try {
+    let result = s3
         .createBucket({
             Bucket: config.bucket
         })
         .promise()
+    } catch (error) {
+        if (error.errorType !== 'BucketAlreadyOwnedByYou') {
+            throw error
+        }
+    }
 }
 
 export async function fetchPresent() {
@@ -18,20 +24,24 @@ export async function fetchPresent() {
         let present = result.modas
 
         return present
-    } catch (err) {
-        let defaultValue = {
-            modas: []
+    } catch (error) {
+        if (error.errorType === 'NoSuchBucket') {
+            let defaultValue = {
+                modas: []
+            }
+
+            await s3
+                .putObject({
+                    Bucket: config.bucket,
+                    Key: config.object,
+                    Body: JSON.stringify(defaultValue)
+                })
+                .promise()
+
+            return defaultValue
+        } else {
+            throw error
         }
-
-        await s3
-            .putObject({
-                Bucket: config.bucket,
-                Key: config.object,
-                Body: JSON.stringify(defaultValue)
-            })
-            .promise()
-
-        return defaultValue
     }
 }
 
