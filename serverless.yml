@@ -12,10 +12,10 @@ provider:
     profile: personal
     region: eu-central-1
     environment:
-        modafinilcat__s3__bucket: modafinilcat-notifier
-        modafinilcat__s3__object: present.json
-        modafinilcat__tg__token: 673982582:AAHdM5iUhDg3YLYmypWdO0I7SW5HCxUgv5Q
-        modafinilcat__tg__chatId: '@ModafinilCatAlerts'
+        modafinilCat__s3__bucket: modafinilcat-notifier-1
+        modafinilCat__s3__object: present.json
+        modafinilCat__tg__token: 673982582:AAHdM5iUhDg3YLYmypWdO0I7SW5HCxUgv5Q
+        modafinilCat__tg__chatId: '@ModafinilCatAlerts'
     role: arn:aws:iam::072423406874:role/s3-read-write
     timeout: 20
 

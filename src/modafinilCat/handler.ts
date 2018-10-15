@@ -27,21 +27,26 @@ export async function check(
         let disappeared = R.difference(previouslyPresent, present)
 
         // notify subs if there are any changes
-        if (appeared.length > 0 && disappeared.length > 0) {
+        if (appeared.length > 0 || disappeared.length > 0) {
             let message = format(present, appeared, disappeared)
-            tg.send(message)
-        }
 
-        // finalize lambda execution
-        lambdaCallback(
-            null,
-            JSON.stringify({
-                present,
-                appeared,
-                disappeared
-            })
-        )
-    } catch (err) {
-        lambdaCallback(err)
+            tg.send(message)
+
+            lambdaCallback(
+                null,
+                JSON.stringify({
+                    present,
+                    appeared,
+                    disappeared
+                })
+            )
+        } else {
+            lambdaCallback(
+                null,
+                'No updates so far.'
+            )
+        }
+    } catch (error) {
+        lambdaCallback(error)
     }
 }

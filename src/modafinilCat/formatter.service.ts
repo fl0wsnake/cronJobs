@@ -6,19 +6,17 @@ function makeLink(moda) {
 
 export function format(present, appeared, disappeared) {
     let updatesFormatted = R.concat(
-        appeared.map(moda => '+' + moda),
-        disappeared.map(moda => '-' + moda)
+        appeared.map(makeLink).map(modaLink => '+ ' + modaLink),
+        disappeared.map(makeLink).map(modaLink => '- ' + modaLink)
     )
-        .map(makeLink)
         .join('\n')
     let presentFormatted = present.map(makeLink).join('\n')
 
     let message = `
-[ModafinilCat](https://modafinilcat.com.ua/)
-Updates:
+*Updates*:
 ${updatesFormatted}
-Currently present:
-${present}
+*Currently present*:
+${presentFormatted}
 `
 
     return message

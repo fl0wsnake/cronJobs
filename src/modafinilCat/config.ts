@@ -1,1 +1,3 @@
-export {s3, tg} from '../config/config'
+import {config} from '../config/config'
+let {s3, tg} = config.modafinilCat
+export {s3, tg}
