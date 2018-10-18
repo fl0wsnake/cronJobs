@@ -20,8 +20,8 @@ provider:
     timeout: 20
 
 functions:
-    check:
-        handler: handler.check
+    modafinilCatCheckForUpdates:
+        handler: handler.modafinilCatCheckForUpdates
         events:
             - schedule:
                 rate: rate(1 hour)

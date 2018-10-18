@@ -1,1 +1,1 @@
-export {check} from './src/modafinilCat/handler'
+export {modafinilCatCheckForUpdates} from './src/modafinilCat/handler'

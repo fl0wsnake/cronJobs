@@ -5,7 +5,7 @@ import * as modafinilcat from './modafinilcat.service'
 import * as tg from './telegram.service'
 import {format} from './formatter.service'
 
-export async function check(
+export async function modafinilCatCheckForUpdates(
     event: APIGatewayEvent,
     context: Context,
     lambdaCallback: Callback

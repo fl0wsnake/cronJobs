@@ -25,7 +25,7 @@ export async function fetchPresent() {
 
         return present
     } catch (error) {
-        if (error.errorType === 'NoSuchBucket') {
+        if (error.code === 'NoSuchBucket' || error.code=== 'NoSuchKey') {
             let defaultValue = {
                 modas: []
             }
