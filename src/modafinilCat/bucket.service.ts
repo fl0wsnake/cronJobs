@@ -4,13 +4,14 @@ const s3 = new AWS.S3()
 
 export async function init() {
     try {
-    let result = s3
+    let result = await s3
         .createBucket({
             Bucket: config.bucket
         })
         .promise()
+        return result
     } catch (error) {
-        if (error.errorType !== 'BucketAlreadyOwnedByYou') {
+        if (error.code !== 'BucketAlreadyOwnedByYou') {
             throw error
         }
     }
