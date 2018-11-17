@@ -9,7 +9,7 @@ provider:
     name: aws
     runtime: nodejs8.10
     stage: dev
-    profile: personal
+    profile: personal_eu
     region: eu-central-1
     environment:
         modafinilCat__s3__bucket: modafinilcat-notifier-1

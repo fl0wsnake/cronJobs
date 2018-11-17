@@ -19,15 +19,15 @@ export async function modafinilCatCheckForUpdates(
         // fetch present modas from the website
         let present = await modafinilcat.fetchPresent()
 
-        // update bucket with new present modas
-        await bucket.putPresent(present)
-
         // diff changes
         let appeared = R.difference(present, previouslyPresent)
         let disappeared = R.difference(previouslyPresent, present)
 
         // notify subs if there are any changes
         if (appeared.length > 0 || disappeared.length > 0) {
+            // update bucket with new present modas
+            await bucket.putPresent(present)
+
             let message = format(present, appeared, disappeared)
 
             tg.send(message)
