@@ -5,8 +5,10 @@
     "main": "handler.js",
     "scripts": {
         "dev": "sls offline",
-        "deploy": "AWS_SDK_LOAD_CONFIG=1 sls deploy",
-        "remove": "AWS_SDK_LOAD_CONFIG=1 sls remove"
+        "deploy": "sls deploy",
+        "remove": "sls remove",
+        "invoke": "sls invoke -f modafinilCatCheckForUpdates",
+        "invoke_local": "sls invoke local -f modafinilCatCheckForUpdates"
     },
     "devDependencies": {
         "@types/aws-lambda": "0.0.22",
@@ -15,7 +17,9 @@
         "@types/node": "^8.0.57",
         "@types/node-telegram-bot-api": "^0.30.3",
         "@types/ramda": "^0.25.24",
+        "@types/serverless": "^1.18.1",
         "@types/typescript": "^2.0.0",
+        "serverless": "github:serverless/serverless#5487ad80933e5b260592fa703963bf04a51e8814",
         "serverless-offline": "^3.27.0",
         "serverless-webpack": "^4.0.0",
         "ts-loader": "^2.3.7",
