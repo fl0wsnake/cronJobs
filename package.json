@@ -5,7 +5,8 @@
     "main": "handler.js",
     "scripts": {
         "dev": "sls offline",
-        "deploy": "AWS_PROFILE=personal_eu sls deploy"
+        "deploy": "AWS_SDK_LOAD_CONFIG=1 sls deploy",
+        "remove": "AWS_SDK_LOAD_CONFIG=1 sls remove"
     },
     "devDependencies": {
         "@types/aws-lambda": "0.0.22",

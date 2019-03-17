@@ -17,7 +17,7 @@ export async function modafinilCatCheckForUpdates(
         let previouslyPresent = await bucket.fetchPresent()
 
         // fetch present modas from the website
-        let present = await modafinilcat.fetchPresent()
+        let present = await modafinilcat.fetchPresentModas()
 
         // diff changes
         let appeared = R.difference(present, previouslyPresent)
